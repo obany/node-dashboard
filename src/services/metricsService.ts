@@ -57,7 +57,8 @@ export class MetricsService {
             WebSocketTopic.Status,
             WebSocketTopic.SyncStatus,
             WebSocketTopic.DBSizeMetric,
-            WebSocketTopic.PeerMetric
+            WebSocketTopic.PeerMetric,
+            WebSocketTopic.ConfirmedMsMetrics
         ];
 
         for (const topic of topics) {
@@ -134,12 +135,12 @@ export class MetricsService {
         if (!this._cached[topic]) {
             this._cached[topic] = [];
         }
-        if (topic === WebSocketTopic.DBSizeMetric) {
+        if (topic === WebSocketTopic.DBSizeMetric || topic === WebSocketTopic.ConfirmedMsMetrics) {
             this._cached[topic].push(...data as unknown[]);
         } else {
             this._cached[topic].push(data);
         }
-        this._cached[topic] = this._cached[topic].slice(-50);
+        this._cached[topic] = this._cached[topic].slice(-60);
 
         if (this._subscriptions[topic]) {
             for (const subscriber of this._subscriptions[topic]) {

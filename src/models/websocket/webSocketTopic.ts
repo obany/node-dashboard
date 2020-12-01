@@ -7,7 +7,7 @@ export enum WebSocketTopic {
     TxValue = 5,
     Ms = 6,
     PeerMetric = 7,
-    ConfirmedMsMetrics =8,
+    ConfirmedMsMetrics = 8,
     Vertex = 9,
     SolidInfo = 10,
     ConfirmedInfo = 11,

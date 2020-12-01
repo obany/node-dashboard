@@ -56,7 +56,7 @@ class Graph extends Component<GraphProps, GraphState> {
                 <div className="title-row">
                     <div className="caption">{this.props.caption}</div>
                     <div className="key">
-                        {this.props.series.map((s, idx) => (
+                        {this.props.series.length > 1 && this.props.series.map((s, idx) => (
                             <span key={idx} className="key">
                                 <div className={classNames("key-color", s.className)} />
                                 <span className="key-label">
@@ -133,13 +133,14 @@ class Graph extends Component<GraphProps, GraphState> {
                 }
             }
 
-            const yScale = (graphHeight * 0.9) / maxY;
+            const yUsage = 0.9;
             const axisLabelWidth = 30;
             const marginLeft = 10;
             const marginRight = 10;
-            const barWidth = (graphWidth - axisLabelWidth - marginLeft - marginRight) / this.props.seriesMaxLength;
-
             const axisLineCount = 4;
+
+            const yScale = (graphHeight * yUsage) / maxY;
+            const barWidth = (graphWidth - axisLabelWidth - marginLeft - marginRight) / this.props.seriesMaxLength;
             const axisSpacing = graphHeight / (axisLineCount - 1);
 
             for (let i = 0; i < axisLineCount; i++) {
@@ -151,7 +152,7 @@ class Graph extends Component<GraphProps, GraphState> {
                 text.push({
                     x: 0,
                     y: graphHeight - (i * axisSpacing) + 2,
-                    content: Math.round((i * (maxY / axisLineCount))).toString()
+                    content: Math.round((i * ((maxY / yUsage) / (axisLineCount - 1)))).toString()
                 });
             }
 

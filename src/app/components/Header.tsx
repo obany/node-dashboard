@@ -5,6 +5,7 @@ import { IStatus } from "../../models/websocket/IStatus";
 import { ITpsMetrics } from "../../models/websocket/ITpsMetrics";
 import { WebSocketTopic } from "../../models/websocket/webSocketTopic";
 import { MetricsService } from "../../services/metricsService";
+import { DataHelper } from "../../utils/dataHelper";
 import { FormatHelper } from "../../utils/formatHelper";
 import "./Header.scss";
 import { HeaderState } from "./HeaderState";
@@ -50,10 +51,10 @@ class Header extends Component<unknown, HeaderState> {
             nodeHealth: false,
             mps: "-",
             mpsValues: [],
-            memorySize: "-",
-            memorySizeValues: [],
-            databaseSize: "-",
-            databaseSizeValues: []
+            memorySizeFormatted: "-",
+            memorySize: [],
+            databaseSizeFormatted: "-",
+            databaseSize: []
         };
     }
 
@@ -64,10 +65,10 @@ class Header extends Component<unknown, HeaderState> {
         this._statusSubscription = this._metricsService.subscribe<IStatus>(
             WebSocketTopic.Status,
             data => {
-                const memorySizeFormatted = FormatHelper.size(this.calculateMemoryUsage(data), 1);
+                const memorySizeFormatted = FormatHelper.size(DataHelper.calculateMemoryUsage(data), 1);
 
-                if (memorySizeFormatted !== this.state.memorySize) {
-                    this.setState({ memorySize: memorySizeFormatted });
+                if (memorySizeFormatted !== this.state.memorySizeFormatted) {
+                    this.setState({ memorySizeFormatted });
                 }
                 if (data.is_healthy !== this.state.nodeHealth) {
                     this.setState({ nodeHealth: data.is_healthy });
@@ -77,21 +78,22 @@ class Header extends Component<unknown, HeaderState> {
                 }
             },
             dataAll => {
-                this.setState({ memorySizeValues: dataAll.map(d => this.calculateMemoryUsage(d)) });
+                this.setState({ memorySize: dataAll.map(d => DataHelper.calculateMemoryUsage(d)) });
             });
 
         this._databaseSizeSubscription = this._metricsService.subscribe<IDBSizeMetric>(
             WebSocketTopic.DBSizeMetric,
-            undefined,
+            data => {
+                const databaseSizeFormatted = FormatHelper.size(data.total);
+
+                if (databaseSizeFormatted !== this.state.databaseSizeFormatted) {
+                    this.setState({ databaseSizeFormatted });
+                }
+            },
             dataAll => {
                 const databaseSizeValues = dataAll.map(d => d.total);
 
-                const databaseSizeFormatted = FormatHelper.size(databaseSizeValues[databaseSizeValues.length - 1]);
-
-                if (databaseSizeFormatted !== this.state.databaseSize) {
-                    this.setState({ databaseSize: databaseSizeFormatted });
-                }
-                this.setState({ databaseSizeValues });
+                this.setState({ databaseSize: databaseSizeValues });
             });
 
         this._mpsMetricsSubscription = this._metricsService.subscribe<ITpsMetrics>(
@@ -101,7 +103,7 @@ class Header extends Component<unknown, HeaderState> {
 
                 const mpsFormatted = mpsValues[mpsValues.length - 1].toString();
 
-                if (mpsFormatted !== this.state.databaseSize) {
+                if (mpsFormatted !== this.state.databaseSizeFormatted) {
                     this.setState({ mps: mpsFormatted });
                 }
                 this.setState({ mpsValues });
@@ -158,31 +160,19 @@ class Header extends Component<unknown, HeaderState> {
                     />
                     <MicroGraph
                         label="Database"
-                        value={this.state.databaseSize}
-                        values={this.state.databaseSizeValues}
+                        value={this.state.databaseSizeFormatted}
+                        values={this.state.databaseSize}
                         className="child"
                     />
                     <MicroGraph
                         label="Memory"
-                        value={this.state.memorySize}
-                        values={this.state.memorySizeValues}
+                        value={this.state.memorySizeFormatted}
+                        values={this.state.memorySize}
                         className="child"
                     />
                 </div>
             </header>
         );
-    }
-
-    /**
-     * Calculate the memory usage.
-     * @param status The status.
-     */
-    private calculateMemoryUsage(status: IStatus): number {
-        return status.mem.heap_inuse +
-            (status.mem.heap_idle - status.mem.heap_released) +
-            status.mem.m_span_inuse +
-            status.mem.m_cache_inuse +
-            status.mem.stack_sys;
     }
 }
 

@@ -22,20 +22,20 @@ export interface HeaderState {
     /**
      * Database size for micro graph.
      */
-    databaseSize: string;
+    databaseSizeFormatted: string;
 
     /**
      * Database size values for micro graph.
      */
-    databaseSizeValues: number[];
+    databaseSize: number[];
 
     /**
      * Memory size for micro graph.
      */
-    memorySize: string;
+    memorySizeFormatted: string;
 
     /**
      * Memory size values for micro graph.
      */
-    memorySizeValues: number[];
+    memorySize: number[];
 }
