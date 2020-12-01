@@ -1,0 +1,87 @@
+@import '../../scss/card';
+@import '../../scss/fonts';
+
+.home {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 60px;
+
+  .content {
+    flex: 1;
+    max-width: $content-width-desktop;
+
+    .banner {
+      flex: 1;
+      height: 140px;
+
+      .node-info {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: $spacing-small;
+      }
+
+      .banner-image {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        background-color: $banner-background;
+      }
+    }
+
+    .info {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      width: 350px;
+      height: 100px;
+      margin-right: $spacing-small;
+
+      .value {
+        @include font-size(24px);
+        margin-top: $spacing-tiny;
+        color: $text-color-primary;
+        font-family: $font-sans;
+        font-weight: bold;
+        white-space: nowrap;
+
+        .value--small {
+          @include font-size(14px);
+        }
+      }
+
+      .icon-background {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        margin-right: 20px;
+        border-radius: $spacing-small;
+
+        &.icon-background--milestone {
+          background-color: #ecfdfc;
+        }
+
+        &.icon-background--pruning {
+          background-color: #fff6f2;
+        }
+
+        &.icon-background--uptime {
+          background-color: #f1f8ff;
+        }
+
+        &.icon-background--memory {
+          background-color: #f3f3fe;
+        }
+      }
+    }
+
+    .peers {
+      width: 350px;
+    }
+  }
+}

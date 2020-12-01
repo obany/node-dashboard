@@ -1,0 +1,63 @@
+@import './variables';
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.fill {
+  flex: 1;
+}
+
+.margin-t-t {
+  margin-top: $spacing-tiny;
+}
+
+.margin-t-s {
+  margin-top: $spacing-small;
+}
+
+.margin-t-m {
+  margin-top: $spacing-medium;
+}
+
+.margin-b-t {
+  margin-bottom: $spacing-tiny;
+}
+
+.margin-b-s {
+  margin-bottom: $spacing-small;
+}
+
+.margin-b-m {
+  margin-bottom: $spacing-medium;
+}
+
+.margin-r-t {
+  margin-right: $spacing-tiny;
+}
+
+.margin-r-s {
+  margin-right: $spacing-small;
+}
+
+.margin-r-m {
+  margin-right: $spacing-medium;
+}
+
+.margin-l-t {
+  margin-left: $spacing-tiny;
+}
+
+.margin-l-s {
+  margin-left: $spacing-small;
+}
+
+.margin-l-m {
+  margin-left: $spacing-medium;
+}

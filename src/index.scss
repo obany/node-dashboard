@@ -1,0 +1,24 @@
+@import './scss/layout';
+@import './scss/standard';
+@import './scss/variables';
+
+html {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  height: 100%;
+  background-color: $background;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+}

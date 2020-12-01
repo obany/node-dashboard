@@ -1,0 +1,61 @@
+{
+    "name": "node-dashboard",
+    "description": "Dashboard for Nodes",
+    "version": "1.0.0",
+    "author": "Martyn Janes <martyn.janes@iota.org>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/iotaledger/node-dashboard"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@iota/iota2.js": "github:obany/iota2.js",
+        "classnames": "^2.2.6",
+        "humanize-duration": "^3.24.0",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-helmet": "^6.1.0",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "^3.4.3"
+    },
+    "engines": {
+        "node": "12.x.x"
+    },
+    "scripts": {
+        "start": "cross-env PORT=9090 WDS_SOCKET_PORT=9090 REACT_APP_SOCKET=8081 REACT_APP_BRAND_ID=hornet craco start",
+        "lint": "eslint src --ext .tsx,.ts",
+        "build-internal": "craco build",
+        "build": "cross-env REACT_APP_BRAND_ID=hornet run-s lint build-internal",
+        "test": "craco test",
+        "eject": "react-scripts eject",
+        "sass-lint": "sass-lint -v -c ./.sass-lint.yml"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ],
+    "devDependencies": {
+        "@craco/craco": "^5.8.0",
+        "@types/classnames": "^2.2.11",
+        "@types/humanize-duration": "^3.18.1",
+        "@types/node": "^14.14.10",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "@types/react-helmet": "^6.1.0",
+        "@types/react-router-dom": "^5.1.6",
+        "@typescript-eslint/eslint-plugin": "^4.8.2",
+        "@typescript-eslint/parser": "^4.8.2",
+        "cross-env": "^7.0.2",
+        "eslint": "^7.14.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsdoc": "^30.7.8",
+        "eslint-plugin-react": "^7.21.5",
+        "eslint-plugin-unicorn": "^23.0.0",
+        "node-sass": "^4.14.1",
+        "npm-run-all": "^4.1.5",
+        "sass-lint": "^1.13.1",
+        "typescript": "^4.1.2"
+    }
+}
