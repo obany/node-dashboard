@@ -224,7 +224,7 @@ class Home extends AsyncComponent<unknown, HomeState> {
                                 </div>
                             </div>
                             <div className="row margin-t-s">
-                                <div className="card fill margin-r-s">
+                                <div className="card fill messages-graph-panel margin-r-s">
                                     <Graph
                                         caption="Messages Per Second"
                                         seriesMaxLength={40}
@@ -244,7 +244,7 @@ class Home extends AsyncComponent<unknown, HomeState> {
                                 </div>
                             </div>
                         </div>
-                        <div className="card peers">
+                        <div className="card peers-summary-panel">
                             <PeersSummaryPanel />
                         </div>
                     </div>

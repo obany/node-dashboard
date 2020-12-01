@@ -5,6 +5,7 @@ import { ServiceFactory } from "../../factories/serviceFactory";
 import { IPeerMetric } from "../../models/websocket/IPeerMetric";
 import { WebSocketTopic } from "../../models/websocket/webSocketTopic";
 import { MetricsService } from "../../services/metricsService";
+import { DataHelper } from "../../utils/dataHelper";
 import "./PeersSummaryPanel.scss";
 import { PeersSummaryState } from "./PeersSummaryState";
 
@@ -68,7 +69,7 @@ class PeersSummaryPanel extends Component<unknown, PeersSummaryState> {
                     <p>There are no peers.</p>
                 )}
                 {this.state.peers?.map((p, idx) => (
-                    <div key={idx} className="peer">
+                    <div key={idx} className="peers-summary--item">
                         <img src={p.connected ? HealthGoodIcon : HealthBadIcon} />
                         <span className="peer-id">
                             {p.name}
@@ -92,70 +93,13 @@ class PeersSummaryPanel extends Component<unknown, PeersSummaryState> {
     private handleData(data: IPeerMetric[]): void {
         this.setState({
             peers: data
-                ? data.map(p => ({
+                ? DataHelper.sortPeers(data.map(p => ({
                     connected: p.connected,
-                    name: this.formatPeerName(p),
-                    address: this.formatPeerAddress(p)
-                })).sort((a, b) => {
-                    if (a.connected && !b.connected) {
-                        return -1;
-                    } else if (!a.connected && b.connected) {
-                        return 1;
-                    }
-
-                    return a.name.localeCompare(b.name);
-                })
+                    name: DataHelper.formatPeerName(p),
+                    address: DataHelper.formatPeerAddress(p)
+                })))
                 : undefined
         });
-    }
-
-    /**
-     * Format the name for the peer.
-     * @param peer The peer.
-     * @returns The formatted name.
-     */
-    private formatPeerName(peer: IPeerMetric): string {
-        let name = "";
-
-        if (peer.alias) {
-            name += peer.alias;
-        } else if (peer.identity) {
-            name += peer.identity;
-        }
-
-        return name;
-    }
-
-    /**
-     * Format the address for the peer.
-     * @param peer The peer.
-     * @returns The formatted address.
-     */
-    private formatPeerAddress(peer: IPeerMetric): string | undefined {
-        let address;
-
-        if (peer.origin_addr) {
-            address = this.extractIp4(peer.origin_addr);
-        }
-
-        if (!address && peer.info.address.length > 0) {
-            address = this.extractIp4(peer.info.address[0]);
-        }
-
-        return address;
-    }
-
-    /**
-     * Extract and format an IPv4 address.
-     * @param addr The address to extract.
-     * @returns The formatted address.
-     */
-    private extractIp4(addr: string): string | undefined {
-        const parts = /ip4\/((?:\d{1,3}.){3}\d{1,3})\/tcp\/(\d*)/.exec(addr);
-
-        if (parts && parts.length === 3) {
-            return `${parts[1]}:${parts[2]}`;
-        }
     }
 }
 

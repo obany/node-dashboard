@@ -4,15 +4,20 @@
 .peers-summary {
   padding: $spacing-small;
 
-  .peer {
+  .peers-summary--item {
     display: flex;
-    flex: 1;
     flex-direction: row;
     align-items: center;
     margin-bottom: $spacing-small;
     padding: $spacing-small;
     border-radius: $spacing-small;
     background-color: $background;
+
+    img {
+      width: 16px;
+      height: 16px;
+      margin-right: $spacing-small;
+    }
 
     .peer-id {
       @include font-size(14px);
@@ -23,12 +28,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-    }
-
-    img {
-      width: 16px;
-      height: 16px;
-      margin-right: $spacing-small;
     }
   }
 }

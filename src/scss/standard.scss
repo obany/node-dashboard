@@ -1,8 +1,17 @@
-@import "./fonts";
-@import "./variables";
+@import './fonts';
+@import './variables';
 
 h1 {
   @include font-size(24px);
+
+  color: $text-color-primary;
+  font-family: $font-sans;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+h2 {
+  @include font-size(18px);
 
   color: $text-color-primary;
   font-family: $font-sans;
