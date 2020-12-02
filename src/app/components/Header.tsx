@@ -1,4 +1,5 @@
 import React, { Component, ReactNode } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { ServiceFactory } from "../../factories/serviceFactory";
 import { IDBSizeMetric } from "../../models/websocket/IDBSizeMetric";
 import { IStatus } from "../../models/websocket/IStatus";
@@ -16,7 +17,7 @@ import SearchInput from "./SearchInput";
 /**
  * Header panel.
  */
-class Header extends Component<unknown, HeaderState> {
+class Header extends Component<RouteComponentProps, HeaderState> {
     /**
      * The metrics service.
      */
@@ -41,7 +42,7 @@ class Header extends Component<unknown, HeaderState> {
      * Create a new instance of Home.
      * @param props The props.
      */
-    constructor(props: unknown) {
+    constructor(props: RouteComponentProps) {
         super(props);
 
         this._metricsService = ServiceFactory.get<MetricsService>("metrics");
@@ -139,7 +140,8 @@ class Header extends Component<unknown, HeaderState> {
             <header className="header">
                 <div className="content">
                     <SearchInput
-                        onSearch={query => console.log(query)}
+                        compact={true}
+                        onSearch={query => this.props.history.push(`/explorer/search/${query}`)}
                         className="child child-fill"
                     />
                     <HealthIndicator
@@ -176,4 +178,4 @@ class Header extends Component<unknown, HeaderState> {
     }
 }
 
-export default Header;
+export default withRouter(Header);

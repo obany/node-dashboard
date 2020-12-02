@@ -21,7 +21,7 @@
     flex: 1;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 32px;
+    margin-bottom: $spacing-large;
 
     .caption {
       @include font-size(10px);

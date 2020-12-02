@@ -27,7 +27,13 @@ class SearchInput extends Component<SearchInputProps, SearchInputState> {
      */
     public render(): ReactNode {
         return (
-            <div className={classNames("search-input", this.props.className)}>
+            <div
+                className={classNames(
+                    "search-input",
+                    { "search-input--compact": this.props.compact },
+                    this.props.className
+                )}
+            >
                 <img src={SearchIcon} />
                 <input
                     type="text"
@@ -38,7 +44,11 @@ class SearchInput extends Component<SearchInputProps, SearchInputState> {
                             this.props.onSearch(this.state.query);
                         }
                     }}
-                    placeholder="Search the Tangle"
+                    placeholder={
+                        this.props.compact
+                            ? "Search the Tangle"
+                            : "Search messages, addresses, outputs, milestones, indexes"
+                    }
                 />
             </div>
         );

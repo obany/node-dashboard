@@ -14,6 +14,7 @@ import { BrandHelper } from "../../utils/brandHelper";
 import { FormatHelper } from "../../utils/formatHelper";
 import AsyncComponent from "../components/AsyncComponent";
 import Graph from "../components/Graph";
+import InfoPanel from "../components/InfoPanel";
 import PeersSummaryPanel from "../components/PeersSummaryPanel";
 import "./Home.scss";
 import { HomeState } from "./HomeState";
@@ -184,44 +185,36 @@ class Home extends AsyncComponent<unknown, HomeState> {
                     <div className="row fill margin-t-s">
                         <div className="col">
                             <div className="row">
-                                <div className="card info">
-                                    <div className="icon-background icon-background--milestone">
-                                        <MilestoneIcon />
-                                    </div>
-                                    <div className="col">
-                                        <h4 className="margin-t-s">LSMI / LMI</h4>
-                                        <div className="value">{this.state.lsmi} / {this.state.lmi}</div>
-                                    </div>
-                                </div>
-                                <div className="card info">
-                                    <div className="icon-background icon-background--pruning">
-                                        <PruningIcon />
-                                    </div>
-                                    <div className="col">
-                                        <h4 className="margin-t-s">Pruning Index</h4>
-                                        <div className="value">{this.state.pruningIndex}</div>
-                                    </div>
-                                </div>
+                                <InfoPanel
+                                    caption="LSMI / LMI"
+                                    value={`${this.state.lsmi} / ${this.state.lmi}`}
+                                    icon={<MilestoneIcon />}
+                                    backgroundStyle="green"
+                                    className="margin-r-s"
+                                />
+                                <InfoPanel
+                                    caption="Pruning Index"
+                                    value={this.state.pruningIndex?.toString()}
+                                    icon={<PruningIcon />}
+                                    backgroundStyle="orange"
+                                    className="margin-r-s"
+                                />
                             </div>
                             <div className="row margin-t-s">
-                                <div className="card info">
-                                    <div className="icon-background icon-background--uptime">
-                                        <UptimeIcon />
-                                    </div>
-                                    <div className="col">
-                                        <h4 className="margin-t-s">Uptime</h4>
-                                        <div className="value">{this.state.uptime}</div>
-                                    </div>
-                                </div>
-                                <div className="card info">
-                                    <div className="icon-background icon-background--memory">
-                                        <MemoryIcon />
-                                    </div>
-                                    <div className="col">
-                                        <h4 className="margin-t-s">Memory Usage</h4>
-                                        <div className="value">{this.state.memory}</div>
-                                    </div>
-                                </div>
+                                <InfoPanel
+                                    caption="Uptime"
+                                    value={this.state.uptime}
+                                    icon={<UptimeIcon />}
+                                    backgroundStyle="blue"
+                                    className="margin-r-s"
+                                />
+                                <InfoPanel
+                                    caption="Memory Usage"
+                                    value={this.state.memory}
+                                    icon={<MemoryIcon />}
+                                    backgroundStyle="purple"
+                                    className="margin-r-s"
+                                />
                             </div>
                             <div className="row margin-t-s">
                                 <div className="card fill messages-graph-panel margin-r-s">

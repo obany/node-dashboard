@@ -26,6 +26,10 @@
   margin-top: $spacing-medium;
 }
 
+.margin-t-l {
+  margin-top: $spacing-large;
+}
+
 .margin-b-t {
   margin-bottom: $spacing-tiny;
 }
@@ -36,6 +40,10 @@
 
 .margin-b-m {
   margin-bottom: $spacing-medium;
+}
+
+.margin-b-l {
+  margin-bottom: $spacing-large;
 }
 
 .margin-r-t {
@@ -50,6 +58,10 @@
   margin-right: $spacing-medium;
 }
 
+.margin-r-l {
+  margin-right: $spacing-large;
+}
+
 .margin-l-t {
   margin-left: $spacing-tiny;
 }
@@ -62,6 +74,10 @@
   margin-left: $spacing-medium;
 }
 
+.margin-l-l {
+  margin-left: $spacing-large;
+}
+
 .padding-t {
   padding: $spacing-tiny;
 }
@@ -72,4 +88,8 @@
 
 .padding-m {
   padding: $spacing-medium;
+}
+
+.padding-l {
+  padding: $spacing-large;
 }

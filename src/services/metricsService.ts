@@ -58,7 +58,8 @@ export class MetricsService {
             WebSocketTopic.SyncStatus,
             WebSocketTopic.DBSizeMetric,
             WebSocketTopic.PeerMetric,
-            WebSocketTopic.ConfirmedMsMetrics
+            WebSocketTopic.ConfirmedMsMetrics,
+            WebSocketTopic.Ms
         ];
 
         for (const topic of topics) {
