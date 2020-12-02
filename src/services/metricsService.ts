@@ -137,7 +137,11 @@ export class MetricsService {
             this._cached[topic] = [];
         }
         if (topic === WebSocketTopic.DBSizeMetric || topic === WebSocketTopic.ConfirmedMsMetrics) {
-            this._cached[topic].push(...data as unknown[]);
+            if (Array.isArray(data)) {
+                this._cached[topic].push(...data as unknown[]);
+            } else {
+                this._cached[topic].push(data);
+            }
         } else {
             this._cached[topic].push(data);
         }

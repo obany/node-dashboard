@@ -7,8 +7,8 @@ import { IPeerMetric } from "../../models/websocket/IPeerMetric";
 import { WebSocketTopic } from "../../models/websocket/webSocketTopic";
 import { MetricsService } from "../../services/metricsService";
 import { DataHelper } from "../../utils/dataHelper";
-import AsyncComponent from "../components/AsyncComponent";
-import Graph from "../components/Graph";
+import AsyncComponent from "../components/layout/AsyncComponent";
+import Graph from "../components/layout/Graph";
 import "./Peers.scss";
 import { PeersState } from "./PeersState";
 

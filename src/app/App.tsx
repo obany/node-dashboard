@@ -7,12 +7,22 @@ import { ReactComponent as PeersIcon } from "../assets/peers.svg";
 import { ReactComponent as SettingsIcon } from "../assets/settings.svg";
 import { ReactComponent as VisualizerIcon } from "../assets/visualizer.svg";
 import "./App.scss";
-import Header from "./components/Header";
-import NavPanel from "./components/NavPanel";
+import Header from "./components/layout/Header";
+import NavPanel from "./components/layout/NavPanel";
 import Analytics from "./routes/Analytics";
 import Explorer from "./routes/Explorer";
+import Address from "./routes/explorer/Address";
+import { AddressRouteProps } from "./routes/explorer/AddressRouteProps";
+import Indexed from "./routes/explorer/Indexed";
+import { IndexedRouteProps } from "./routes/explorer/IndexedRouteProps";
+import Message from "./routes/explorer/Message";
+import { MessageRouteProps } from "./routes/explorer/MessageRouteProps";
+import Milestone from "./routes/explorer/Milestone";
+import { MilestoneRouteProps } from "./routes/explorer/MilestoneRouteProps";
 import Home from "./routes/Home";
 import Peers from "./routes/Peers";
+import Search from "./routes/Search";
+import { SearchRouteProps } from "./routes/SearchRouteProps";
 import Settings from "./routes/Settings";
 import Visualizer from "./routes/Visualizer";
 
@@ -62,7 +72,7 @@ class App extends Component<RouteComponentProps> {
                 />
                 <div className="col fill">
                     <Header />
-                    <div className="fill">
+                    <div className="fill scroll-content">
                         <Switch>
                             <Route
                                 exact={true}
@@ -79,7 +89,32 @@ class App extends Component<RouteComponentProps> {
                             />
                             <Route
                                 path="/explorer"
+                                exact={true}
                                 component={() => (<Explorer />)}
+                            />
+                            <Route
+                                path="/search/:query?"
+                                component={(props: RouteComponentProps<SearchRouteProps>) => (<Search {...props} />)}
+                            />
+                            <Route
+                                path="/explorer/message/:messageId"
+                                component={(props: RouteComponentProps<MessageRouteProps>) =>
+                                    (<Message {...props} />)}
+                            />
+                            <Route
+                                path="/explorer/milestone/:milestoneIndex"
+                                component={(props: RouteComponentProps<MilestoneRouteProps>) =>
+                                    (<Milestone {...props} />)}
+                            />
+                            <Route
+                                path="/explorer/indexed/:index"
+                                component={(props: RouteComponentProps<IndexedRouteProps>) =>
+                                    (<Indexed {...props} />)}
+                            />
+                            <Route
+                                path="/explorer/address/:address"
+                                component={(props: RouteComponentProps<AddressRouteProps>) =>
+                                    (<Address {...props} />)}
                             />
                             <Route
                                 path="/visualizer"

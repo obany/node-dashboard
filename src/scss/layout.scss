@@ -3,6 +3,10 @@
 .row {
   display: flex;
   flex-direction: row;
+
+  &.middle {
+    align-items: center;
+  }
 }
 
 .col {

@@ -8,9 +8,9 @@ import { IConfirmedMsMetrics } from "../../models/websocket/IConfirmedMsMetrics"
 import { IMs } from "../../models/websocket/IMs";
 import { WebSocketTopic } from "../../models/websocket/webSocketTopic";
 import { MetricsService } from "../../services/metricsService";
-import AsyncComponent from "../components/AsyncComponent";
-import InfoPanel from "../components/InfoPanel";
-import SearchInput from "../components/SearchInput";
+import AsyncComponent from "../components/layout/AsyncComponent";
+import InfoPanel from "../components/layout/InfoPanel";
+import SearchInput from "../components/layout/SearchInput";
 import "./Explorer.scss";
 import { ExplorerState } from "./ExplorerState";
 
@@ -73,9 +73,9 @@ class Peers extends AsyncComponent<RouteComponentProps, ExplorerState> {
             WebSocketTopic.ConfirmedMsMetrics,
             data => {
                 this.setState({
-                    mps: data.mps.toString(),
-                    cmps: data.cmps.toString(),
-                    confirmationRate: `${data.referenced_rate.toFixed(0).toString()}%`
+                    mps: data.mps.toFixed(1).toString(),
+                    cmps: data.cmps.toFixed(1).toString(),
+                    confirmationRate: `${data.referenced_rate.toFixed(1).toString()}%`
                 });
             }
         );
@@ -110,7 +110,7 @@ class Peers extends AsyncComponent<RouteComponentProps, ExplorerState> {
                     <div className="card search-panel">
                         <SearchInput
                             compact={false}
-                            onSearch={query => this.props.history.push(`/explorer/search/${query}`)}
+                            onSearch={query => this.props.history.push(`/search/${query}`)}
                         />
                     </div>
                     <div className="row info margin-t-s">
@@ -138,7 +138,7 @@ class Peers extends AsyncComponent<RouteComponentProps, ExplorerState> {
                     <div className="card milestones-panel margin-t-s">
                         <h4 className="margin-b-l">Latest Milestones</h4>
                         {this.state.milestones.map((ms, idx) => (
-                            <div key={idx} className="milestone">
+                            <div key={idx} className="milestones-panel--milestone">
                                 <div className="index">{ms.index}</div>
                                 <Link
                                     to={`/explorer/message/${ms.messageId}`}

@@ -12,10 +12,10 @@ import { WebSocketTopic } from "../../models/websocket/webSocketTopic";
 import { MetricsService } from "../../services/metricsService";
 import { BrandHelper } from "../../utils/brandHelper";
 import { FormatHelper } from "../../utils/formatHelper";
-import AsyncComponent from "../components/AsyncComponent";
-import Graph from "../components/Graph";
-import InfoPanel from "../components/InfoPanel";
-import PeersSummaryPanel from "../components/PeersSummaryPanel";
+import AsyncComponent from "../components/layout/AsyncComponent";
+import Graph from "../components/layout/Graph";
+import InfoPanel from "../components/layout/InfoPanel";
+import PeersSummaryPanel from "../components/tangle/PeersSummaryPanel";
 import "./Home.scss";
 import { HomeState } from "./HomeState";
 

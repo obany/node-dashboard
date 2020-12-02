@@ -1,4 +1,5 @@
 import humanize from "humanize-duration";
+import moment from "moment";
 
 /**
  * Class to help formatting values.
@@ -43,5 +44,26 @@ export class FormatHelper {
         }
 
         return `${value} ${unit}`;
+    }
+
+    /**
+     * Format the date.
+     * @param valueInMs The value to format in milliseconds.
+     * @returns The formated value.
+     */
+    public static date(valueInMs: number): string {
+        const asStringLength = valueInMs.toString().length;
+
+        // If there are less than 13 digits this must be in seconds
+        // https://stackoverflow.com/questions/23929145/how-to-test-if-a-given-time-stamp-is-in-seconds-or-milliseconds
+        if (asStringLength < 13) {
+            valueInMs *= 1000;
+        }
+
+        const timeMoment = moment(valueInMs);
+
+        const postDate = valueInMs > Date.now() ? "in the future" : "ago";
+
+        return `${timeMoment.format("LLLL")} - ${moment.duration(moment().diff(timeMoment)).humanize()} ${postDate}`;
     }
 }

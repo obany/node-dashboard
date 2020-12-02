@@ -8,9 +8,9 @@ import { ITpsMetrics } from "../../models/websocket/ITpsMetrics";
 import { WebSocketTopic } from "../../models/websocket/webSocketTopic";
 import { MetricsService } from "../../services/metricsService";
 import { DataHelper } from "../../utils/dataHelper";
-import AsyncComponent from "../components/AsyncComponent";
-import Graph from "../components/Graph";
-import TabPanel from "../components/TabPanel";
+import AsyncComponent from "../components/layout/AsyncComponent";
+import Graph from "../components/layout/Graph";
+import TabPanel from "../components/layout/TabPanel";
 import "./Analytics.scss";
 import { AnalyticsState } from "./AnalyticsState";
 

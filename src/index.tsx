@@ -7,6 +7,7 @@ import { ServiceFactory } from "./factories/serviceFactory";
 import "./index.scss";
 import { IBrandConfiguration } from "./models/IBrandConfiguration";
 import { MetricsService } from "./services/metricsService";
+import { TangleService } from "./services/tangleService";
 import { WebSocketService } from "./services/webSocketService";
 import { BrandHelper } from "./utils/brandHelper";
 
@@ -21,27 +22,32 @@ initServices()
                             <link
                                 rel="apple-touch-icon"
                                 sizes="180x180"
-                                href={`/${brandConfiguration?.name.toLowerCase()}/favicon/apple-touch-icon.png`}
+                                href={`/branding/${brandConfiguration?.name.toLowerCase()
+                                    }/favicon/apple-touch-icon.png`}
                             />
                             <link
                                 rel="icon"
                                 type="image/png"
                                 sizes="32x32"
-                                href={`/${brandConfiguration?.name.toLowerCase()}/favicon/favicon-32x32.png`}
+                                href={`/branding/${brandConfiguration?.name.toLowerCase()
+                                    }/favicon/favicon-32x32.png`}
                             />
                             <link
                                 rel="icon"
                                 type="image/png"
                                 sizes="16x16"
-                                href={`/${brandConfiguration?.name.toLowerCase()}/favicon/favicon-16x16.png`}
+                                href={`/branding/${brandConfiguration?.name.toLowerCase()
+                                    }/favicon/favicon-16x16.png`}
                             />
                             <link
                                 rel="manifest"
-                                href={`/${brandConfiguration?.name.toLowerCase()}/favicon/site.webmanifest`}
+                                href={`/branding/${brandConfiguration?.name.toLowerCase()
+                                    }/favicon/site.webmanifest`}
                             />
                             <link
                                 rel="mask-icon"
-                                href={`/${brandConfiguration?.name.toLowerCase()}/favicon/safari-pinned-tab.svg`}
+                                href={`/branding/${brandConfiguration?.name.toLowerCase()
+                                    }/favicon/safari-pinned-tab.svg`}
                                 color="#485776"
                             />
                             <title>{brandConfiguration?.name} Dashboard</title>
@@ -62,6 +68,7 @@ initServices()
  */
 async function initServices(): Promise<IBrandConfiguration | undefined> {
     ServiceFactory.register("web-socket", () => new WebSocketService());
+    ServiceFactory.register("tangle", () => new TangleService());
 
     const metricsService = new MetricsService();
     ServiceFactory.register("metrics", () => metricsService);
